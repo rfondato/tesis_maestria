@@ -1,0 +1,108 @@
+\documentclass[10pt]{article}
+
+\usepackage[spanish]{babel}  
+\usepackage[utf8]{inputenc} 
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsfonts}
+\usepackage{comment}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx,psfrag,float}
+
+
+\voffset-2.5cm 
+\hoffset 0.0cm 
+\topmargin 2cm
+\oddsidemargin-5mm% 
+\evensidemargin 0mm
+\textwidth=17cm
+\textheight=23.2cm 
+%\columnsep=0.8cm
+\pagestyle{empty}
+\renewcommand{\baselinestretch}{1}  
+\sloppy  
+\widowpenalty100000   
+\clubpenalty100000
+\parskip 2mm   
+
+
+\begin{document}
+\title{{\bf Tesis de Maestría}\\ Reconocimiento de acciones humanas en video, utilizando detección de contornos y Deep Learning
+}
+\author{Cronograma de Trabajo \\
+	\ \\
+	 \bf{Alumno}: Rodrigo Fondato\\
+ \ \\
+\bf{Tutor: Juliana Gambini}}
+\date{}
+\maketitle
+	\Large{\textbf{}}
+	
+\section{Descripción del problema}
+
+
+Las técnicas para la detección automática de acciones realizadas por personas en capturas de videos pueden dividirse, a grandes rasgos, en aquellas que utilizan herramientas de procesamiento de imágenes para obtener descriptores espacio-temporales y el posterior uso de modelos clásicos de machine learning para la clasificación, y en aquellas basadas en la explotación de grandes volúmenes de datos y la consecuente utilización de modelos de deep learning para etiquetar las acciones detectadas. \\
+
+Estos últimos modelos, más investigados en la actualidad, permiten obtener descriptores más robustos que los primeros, pero requieren una gran cantidad de recursos computacionales (poder de procesamiento y memoria), tiempo y disponibilidad de datos para su entrenamiento, debido al tamaño de los archivos de video en memoria y la cantidad de parámetros que deben ser optimizados. Existe además, un compromiso entre el horizonte temporal y la resolución espacial. Es decir, a mayor resolución de la imagen de entrada, menor cantidad de cuadros podrán ser analizados por el modelo para efectuar la clasificación, y viceversa. \\
+
+El problema que se intenta resolver es, para una determinada resolución de video de entrada, la expansión del horizonte temporal y la disminución de la cantidad de parámetros de un modelo basado en deep learning, con la consecuente reducción de la cantidad de datos y recursos computacionales necesarios para el entrenamiento, obteniendo a la vez las ventajas de robustez y rendimiento que otorgan éste tipo de modelos, específicamente para el ámbito de reconocimiento de acciones humanas básicas.
+
+\section{Objetivos específicos}
+
+Se propone realizar las siguientes actividades: 
+
+\begin{enumerate}
+	
+	\item Definición del proceso de gestión del proyecto, selección de herramientas a utilizar para la gestión y creación de lista de tareas.
+	
+	\item Definición del proceso de revisión de la literatura y fuentes a investigar, armado de consultas y criterios de selección de artículos, y ejecución del proceso de selección. Lectura de los artículos, y armado del estado de la cuestión.
+	
+	\item Identificación, clasificación, selección y obtención de bases de datos públicas que contengan segmentos de video que muestren acciones humanas.
+	
+	\item Análisis y selección de los segmentos de video según categorías, calidad, duración y formato.
+	
+	\item Implementación y ejecución de un proceso para adaptar y homogeneizar los distintos archivos, obteniendo como resultado una única base de datos.
+	
+	\item Diseño e implementación del modelo de reconocimiento de acciones humanas.
+	
+	\item Diseño de las métricas e implementación de la herramienta que las obtendrá.
+	
+	\item Entrenamiento y optimización del modelo.
+	
+	\item Revisión del diseño de las características y el modelo, propuesta e implementación de mejoras. Obtención de nuevas métricas y elección del modelo ganador.
+	
+	\item Instalación y ejecución de modelos pre-entrenados existentes. Obtención de métricas.
+	
+	\item Análisis de los resultados obtenidos en la comparación de modelos.  Elaboración de conclusiones y finalización del documento de tesis.
+	
+\end{enumerate}
+
+
+\section{Cronograma de trabajo}
+%max 1 pag.
+
+El Cronograma de Trabajo se muestra en el siguiente cuadro:
+
+\begin{table}[!ht]
+	%\caption{Kurtosis and Skewness}
+	\renewcommand{\arraystretch}{1.5}
+	\label{tab:kurskew}
+	\begin{center}
+		\begin{tabular}{| c | c | c | c | c | c | c | c | c | c | c |c |}\cline{1-12}
+			\multicolumn{1}{|c|}{Actividad} & \multicolumn{11}{|c|}{Mes}\\ \hline
+			\multicolumn{1}{|c|}{ } &	\multicolumn{1}{|c|}{ 1} & 					\multicolumn{1}{|c|}{2} & \multicolumn{1}{|c|}{3} & 		\multicolumn{1}{|c|}{4} & \multicolumn{1}{|c|}{ 5} & 					\multicolumn{1}{|c|}{6} & \multicolumn{1}{|c|}{7} & 		\multicolumn{1}{|c|}{8} & \multicolumn{1}{|c|}{ 9} & 					\multicolumn{1}{|c|}{10} & \multicolumn{1}{|c|}{11} \\ \hline
+			Actividad 1 & x & & & & & & & & & & \\ \hline
+			Actividad 2 & x & x & x & & & & & & & & \\ \hline
+			Actividad 3 & & & & x & & & & & & & \\ \hline
+			Actividad 4 & & & & x & x & & & & & & \\ \hline
+			Actividad 5 & & & & & x & x & & & & & \\ \hline
+			Actividad 6 & & & & & & x & x & x & & & \\ \hline
+			Actividad 7 & & & & & & & & x & & & \\ \hline
+			Actividad 8 & & & & & & & & & x & & \\ \hline
+			Actividad 9 & & & & & & & & & x & x & \\ \hline
+			Actividad 10 & & & & & & & & & & x & x \\ \hline
+			Actividad 11 & & & & & & & & & & & x \\ \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+\end{document}

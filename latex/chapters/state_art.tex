@@ -1,0 +1,112 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX root = ../thesis.tex
+\chapter{Estado de la Cuestión} \label{StateArt}
+
+El reconocimiento de actividades humanas (HAR, por sus siglas en inglés), es la habilidad para interpretar movimientos y gestos efectuados por personas a través de sensores, para luego determinar qué acciones o actividades están realizando \citep{Ann2014}. \\
+
+La detección y clasificación de estas actividades no es sencilla, ya que factores como un fondo de imagen complejo, la oclusión parcial de los cuerpos de las personas, cambios en la iluminación o escala de la imagen, dificultan el reconocimiento de los cuerpos humanos \citep{Vrigkas2015}. 
+
+
+\section{Aplicaciones}
+
+Existen numerosas aplicaciones de ésta técnica. Citando solo algunos ejemplos, en el campo de la videovigilancia Ryoo propone un modelo para predecir actividades peligrosas o delictivas a partir de una secuencia de cuadros de video \citep{Ryoo2011}.\\ 
+
+En el campo de la medicina, \citep{Gonzalez-Ortega2014} proponen un sistema para el monitoreo de ejercicios de rehabilitación cognitiva basado en el uso del dispositivo Kinect y procesamiento de datos 3D, realizando el seguimiento de partes del cuerpo de un paciente que permite medir y monitorear la relación entre los movimientos efectuados y los ejercicios indicados. \\
+
+HAR también es utilizado como interfaz entre humanos y computadoras. Mediante gestos y movimientos se pueden generar instrucciones que permiten, por ejemplo, interactuar con un videojuego. \citep{Gerling2012} proponen pautas para el desarrollo de juegos controlados a través del reconocimiento de movimientos en la totalidad del cuerpo para combatir el sedentarismo en adultos mayores. \\
+
+\section{Modelos para el reconocimiento de actividades humanas}
+
+\citep{Vrigkas2015} clasifican a los modelos principalmente en unimodales y multimodales. Los unimodales utilizan datos relacionados a un único aspecto y obtenidos desde una única fuente, como por ejemplo el movimiento a través de una imagen, mientras que los multimodales emplean distintos tipos de características obtenidas por la recolección de múltiples fuentes de datos, por ejemplo imagen y sensores portátiles, que son luego fusionados para efectuar la clasificación.
+
+\subsection{Según la naturaleza de datos utilizados}
+
+Las técnicas empleadas varían según los sensores que son utilizados para recolectar los datos.
+
+A grandes rasgos, podemos dividir a las fuentes de datos en:
+
+\begin{itemize}
+	\item Cámaras RGB: Son las cámaras convencionales. Los modelos que utilizan solo este tipo de datos se enmarcan dentro de las técnicas de visión por computadora.
+	\item Cámaras RGB-D: Son aquellas que, además de los canales RGB, incluyen un cuarto canal (D) que posee información sobre la profundidad de la imagen, es decir, reconocen las tres dimensiones espaciales. Un ejemplo es el dispositivo Kinect.
+	\item Sensores portátiles: Corresponden a sensores presentes en dispositivos portátiles que las personas usan, y otorgan información sobre los movimientos que realizan. Generalmente son acelerómetros.
+	\item Multimodales: Combinaciones de los anteriores. Cámaras y sensores, múltiples dispositivos portátiles, etc. \citep{Yadav2021}
+\end{itemize}
+
+Este trabajo está enfocado en el primer grupo, es decir, técnicas de visión por computadora que usan cámaras RGB.
+
+\subsection{Técnicas basadas en el uso de características espacio-temporales}
+
+Las técnicas unimodales más comunes utilizan una secuencia de imágenes 2D en el tiempo, es decir un cubo 3D como única fuente de datos, y son los denominados por \citep{Vrigkas2015} como métodos de “espacio-tiempo”. Consisten generalmente en la construcción de características obtenidas de las imágenes como puntos de interés, vectores de movimientos, campos de flujo óptico, para luego ser clasificados por un método clásico de machine learning, generalmente SVM \citep{wang2010hidden, Schuldt2004, Jhuang2007, Dalal2005}, o el vecino más cercano \citep{Efros2003, Gorelick2007, Vrigkas2014matching}.\\
+
+Los métodos que emplean campos de flujo óptico permiten representar aproximadamente los movimientos de cada punto de una superficie 3D en un plano 2D, dada una secuencia temporal de imágenes \citep{Beauchemin1995}. Por ejemplo \citep{Efros2003} desarrollaron descriptores basados en vectores de flujo óptico, y utilizando el algoritmo de vecino más cercano, una base de datos de secuencias de videos previamente etiquetados, y una medida de similitud establecida, pueden clasificar acciones realizadas por personas a gran distancia, es decir, cuyas figuras son representadas por una pequeña cantidad de píxeles, comparando nuevas secuencias con videos previamente etiquetados. \\
+
+\citep{Dollar2005} utilizan también descriptores basados en el flujo óptico. Con ello extraen puntos de interés y luego cuboides (es decir pixeles próximos en ambas dimensiones espaciales y la temporal). Cada cuboide es clasificado en tipos mediante el uso de k-means y luego se construye un histograma con los tipos reconocidos para determinar la clasificación. Esté método no tiene en cuenta información de ubicación espacial ni temporal de cada cuboide. \\
+
+\citep{Yan2012}, en cambio, tienen en cuenta la ubicación espacial y temporal extrayendo puntos de interés espacio-temporales (STIP) por regiones y realizando histogramas que consideran éstas ubicaciones.
+
+\subsection{Técnicas estocásticas y jerárquicas}
+
+Los métodos estocásticos consideran a los comportamientos humanos como una secuencia de estados estocásticamente predecibles utilizando, por ejemplo, modelos ocultos de Markov. Los modelos jerárquicos, por otro lado, descomponen una actividad en múltiples acciones de bajo nivel, y luego las combinan en capas que reconocen dinámicas a más alto nivel. Múltiples ejemplos muestran que ambas técnicas suelen estar asociadas, obteniendo descriptores de bajo nivel para cada cuadro y utilizando modelos estocásticos para combinarlos. \\
+
+\citep{Robertson2006} consideran que un determinado comportamiento humano depende de una secuencia estocástica de acciones. Combinan métodos paramétricos (Modelos ocultos de Markov) y no paramétricos (basados en similitudes con bases de datos de videos clasificados). Los métodos no paramétricos sirven para extraer distribuciones para las características de bajo nivel (velocidad, posición, descriptores locales), y los métodos paramétricos permiten extraer comportamientos a más alto nivel, combinando la información de pasos anteriores. \\
+
+Otro ejemplo de esquema estocástico y jerárquico utiliza diferentes niveles de resolución temporal como entrada de datos para determinar el comportamiento a clasificar. Se usan CRFs (campos aleatorios condicionales) con variables latentes para capturar la dinámica de cada capa, y luego se agrupan observaciones vecinas en el tiempo en super observaciones en forma recursiva, calculando probabilidades condicionales en cada nivel con respecto a los anteriores \citep{Song2013}.
+
+\subsection{Técnicas basadas en reglas lógicas}
+
+Otros enfoques utilizan reglas para modelar un evento, descomponiendo una actividad en un conjunto de atributos o reglas primitivas. 
+\citep{Morariu2011}, por ejemplo,  detectan eventos complejos en el ámbito del basketball, incluyendo reglas que permiten desambiguar, entre otras cosas, que una acción es ofensiva o defensiva. Se emplean redes lógicas de Markov para realizar inferencias sobre las características de bajo nivel extraídas del video y predecir eventos de alto nivel, como un disparo al aro.
+
+\subsection{Técnicas basadas en detección de figuras}
+
+Los métodos basados en detección de figuras buscan reconocer las diferentes partes del cuerpo de las personas y detectar las poses, para luego utilizar ésta información para determinar la actividad que se está realizando. \\
+
+\citep{Yang2010} proponen un método para reconocer actividades humanas sobre imágenes estáticas. Extraen las poses humanas como variables latentes del modelo que luego son utilizadas para predecir la acción, es decir, la detección de poses y la clasificación se entrenan en forma conjunta. Para la detección de partes humanas usan Poselets, que describen partes del cuerpo considerando la perspectiva \citep{Bourdev2009}. \\
+
+\citep{Lillo2014} combinan un enfoque de detección de poses con una estructura jerárquica. Establecen tres niveles: en un primer nivel se detectan las poses a partir de características de bajo nivel, en un segundo nivel se combinan estas poses en acciones y finalmente un tercer nivel combina acciones en comportamientos más complejos. Una ventaja detallada es el manejo de oclusiones, ya que el modelo propuesto otorga mayor peso a las partes visibles.
+
+\subsection{Técnicas basadas en el uso de deep learning}
+
+Las técnicas de reconocimiento de actividades humanas basadas en deep learning son recientemente muy utilizadas debido a su buen rendimiento, producto de una robusta extracción de características y capacidad de generalización, pero requieren de una gran capacidad de cómputo y una enorme cantidad de datos para su entrenamiento \citep{Beddiar2020}. \\
+
+\citep{Beddiar2020} clasifican a éstas técnicas en generativas, discriminativas e híbridas. Las generativas son aquellas que utilizan aprendizaje no supervisado para representar distribuciones de datos no etiquetados con menor dimensionalidad, buscando replicar la distribución verdadera del set de datos.
+Las discriminativas comprenden a modelos supervisados (entrenados sobre set de datos etiquetados) que pueden predecir la clase de nuevos datos de entrada. Generalmente se basan en el uso de redes con múltiples capas que toman los datos de entrada y otorgan como resultado una categoría.
+Los híbridos utilizan una combinación de los dos enfoques anteriores. \\
+
+\citep{Asadi-Aghbolaghi2017}, por otro lado, consideran que el desafío más grande es cómo lidiar con la dimensión temporal, y basado en ello, categorizan éstas técnicas en:
+
+\begin{itemize}
+	\item El uso de filtros 3D en redes convolucionales: A las dos dimensiones espaciales de una imagen 2D se le suma la dimensión temporal. Las convoluciones son entonces calculadas tomando en cuenta la vecindad espacial y temporal.
+	\item El uso de características de movimiento (como flujos ópticos 2D) que luego sirven de entrada para el modelo de deep learning. 
+	\item El uso de redes convolucionales para extraer características a nivel espacial combinado con un modelo de secuencias temporales como redes recurrentes, LSTMs y otros similares para modelar la dimensión temporal.
+\end{itemize}
+
+Como un ejemplo del primer caso, \citep{Ji2013} proponen el uso de una red convolucional 3D directamente sobre los cuadros de video. Para resolver la presencia de múltiples personas, se utiliza primero un detector pre-entrenado para obtener cuadros delimitadores, y luego se aplica la red convolucional sobre cada uno, en múltiples imágenes adyacentes en la secuencia temporal, asumiendo que la persona sigue ubicada en la misma posición. Como limitación adicional se menciona el uso de entradas de 80x40 píxeles y 9 cuadros contiguos debido a los requerimientos de memoria por la gran cantidad de parámetros del modelo. \\
+
+\citep{Li2019}, en cambio, proponen el uso de redes convolucionales 3D pero incluyendo bloques densos intermedios con una arquitectura de “cuello de botella” para disminuir la cantidad de parámetros. \\
+
+Otro ejemplo es el propuesto por \citep{Tran2015}, que menciona la creación de características lo suficientemente genéricas para ser utilizadas para diferentes propósitos, construidas a partir de una red convolucional 3D. La red otorga como salidas descriptores de tan solo 10 dimensiones. Sin embargo cada capa convolucional utiliza kernels de 3x3x3, lo que implica el uso de secuencias temporales cortas para la clasificación. \\
+
+Para poder procesar clips de video más largos, una de las soluciones propuestas emplea redes convolucionales 2D sobre cada cuadro y luego capas de pooling para unir los descriptores de cuadros adyacentes, o redes secuenciales como LSTM para modelar la relación temporal, basándose en que los parámetros son compartidos en todos los pasos temporales, lo cual reduce su cantidad \citep{Ng2015}. Este modelo corresponde al tercer tipo descrito por \citep{Asadi-Aghbolaghi2017} \\
+
+Otra solución para reducir los tiempos de entrenamiento y demanda computacional propone inicializar los pesos de la red convolucional 3D usando los pesos pre-entrenados de la red ImageNet 2D \citep{Mansimov2015}. El desafío en ésta propuesta es el de utilizar parámetros pre-entrenados con imágenes estáticas en un modelo que incluye la dimensión temporal.
+
+\subsection{Técnicas que combinan descriptores espacio-temporales y deep learning}
+
+\citep{Simonyan2014} proponen usar dos redes convolucionales separadas que son combinadas en la salida. Una representa la relación espacial y la otra la temporal. Ésta última utiliza flujos ópticos entre los cuadros adyacentes en el tiempo para representar el movimiento de los píxeles como entrada de datos. \\
+
+Continuando ésta línea, \citep{Zhang2018} argumentan que el método descrito anteriormente no es apto para procesamiento en tiempo real debido a la demanda computacional del cálculo de campos de flujo óptico entre cada par de cuadros en la secuencia, y proponen utilizar vectores de movimiento extraídos directamente desde video comprimido. \\
+
+\citep{Peng2015} proponen combinar características de trayectoria como histogramas de gradientes orientados \citep{Dalal2005}, histogramas de flujos ópticos \citep{Chaudhry2009}, e histogramas basados en movimiento \citep{Wang2013} con una red convolucional (VGG19), concatenando los resultados y aplicando un SVM para la clasificación.
+
+\section{Oportunidades y desafíos actuales}
+
+Las cámaras RGB son dispositivos muy comunes, por este motivo los métodos basados en el uso de videos RGB como entrada de datos presentan una gran oportunidad de adopción. Por ejemplo, en el mundo se utiliza una enorme cantidad de cámaras RGB destinadas a video-vigilancia. \\ 
+
+En contraposición, las cámaras RGB-D suelen usarse solo en determinados ámbitos, y las técnicas que usan dispositivos portátiles requieren de múltiples sensores ubicados en las diferentes partes del cuerpo para otorgar un rendimiento adecuado, lo cual puede ser muy intrusivo para las personas \citep{Yadav2021}. \\
+
+Como se describió anteriormente, los modelos alimentados por secuencias de video RGB que utilizan descriptores obtenidos por la aplicación de técnicas clásicas como campos de flujo óptico, puntos de interés espacio-temporales o histogramas de gradientes orientados, tienen ciertas limitaciones para generalizar ya que dependen de aspectos como la iluminación, perspectiva y presentan desafíos cuando hay oclusiones. En algunos casos pueden ser computacionalmente intensivos para la inferencia  \citep{Zhang2018}. \\
+
+En el caso de los métodos basados en el uso de técnicas de deep learning, la gran cantidad de parámetros a entrenar puede resultar en un entrenamiento computacionalmente intensivo, y su rendimiento a la hora de clasificar dependerá de la cantidad de datos que se hayan utilizado, ya que un número de registros que no es lo suficientemente elevado, puede producir el sobreajuste de los parámetros. \\
+
+Otro inconveniente con las técnicas de deep learning es el horizonte temporal que pueden procesar, debido al incremento de parámetros que conlleva expandirlo, con lo cual la clasificación de acciones suele producirse en un segmento breve de tiempo. Para reducir el número de parámetros e incrementar el horizonte temporal, existe un compromiso en el cual se propone reducir la resolución espacial \citep{Asadi-Aghbolaghi2017}.

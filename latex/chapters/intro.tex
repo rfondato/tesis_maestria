@@ -1,0 +1,25 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX root = ../thesis.tex
+\chapter{Introducción} \label{intro}
+
+El reconocimiento de actividades humanas (HAR), consiste en identificar y detectar acciones simples y complejas realizadas por personas, en situaciones de la vida real, utilizando datos obtenidos por sensores \citep{Singh2017}.\\
+
+Existen numerosas aplicaciones para éstas técnicas, entre las cuales se destacan videovigilancia \citep{Ryoo2011}, medicina  \citep{Gonzalez-Ortega2014} o interfaz de aplicaciones, por ejemplo, para controlar un videojuego \citep{Gerling2012}.\\
+
+Los modelos para detección de comportamiento humano difieren y presentan distintos desafíos, según la naturaleza de los datos de entrada que utilicen. Existen técnicas basadas en visión por computadora, cuya fuente de datos pueden ser videos capturados por cámaras RGB (videos convencionales) o por cámaras RGB-D, como los dispositivos Kinect, que capturan también la profundidad de cada punto, permitiendo el reconocimiento de acciones en un espacio 3D; pueden utilizar datos provenientes de sensores portátiles (por ejemplo acelerómetros de los dispositivos móviles) o ser multimodales, es decir, combinar múltiples fuentes de datos \citep{Yadav2021}. \\
+
+Este trabajo analizará únicamente los modelos unimodales que usan segmentos de video convencionales, ya que las cámaras RGB son ampliamente utilizadas, lo cual implica una mayor oportunidad de adopción. Los modelos clásicos más comunes emplean técnicas de procesamiento de imágenes para obtener descriptores espacio-temporales como campos de flujo óptico \citep{Efros2003, Chaudhry2009}, vectores de movimiento \citep{Zhang2018}, histogramas de gradientes orientados (HOG) \citep{Dalal2005}, puntos de interés espacio-temporales (STIPs) \citep{Yan2012}, entre otros, que sirven de entrada para un modelo de clasificación. Otros plantean al comportamiento humano como una secuencia de estados predecibles por modelos estocásticos \citep{Robertson2006}. Otros utilizan descriptores de bajo nivel para identificar acciones atómicas y luego combinarlas para reconocer comportamientos más complejos (jerárquicos) \citep{Song2013}. Existen también modelos basados en la evaluación de reglas lógicas preestablecidas \citep{Morariu2011}. \\
+
+Los modelos anteriormente descritos suelen presentar distintas limitaciones. Algunas de las mencionadas por \citep{Vrigkas2015} son las siguientes:
+\begin{itemize}
+	\item \textbf{Técnicas basadas en descriptores espacio-temporales}: Sensibles al ruido y oclusiones, poca repetibilidad debido a características dispersas, reconocer actividades complejas es difícil, distancia entre características de bajo nivel y eventos de alto nivel.
+	\item \textbf{Modelos estocásticos}: Se necesita un gran número de datos de entrenamiento, propenso al sobreajuste, aprender inferencias es complejo.
+	\item \textbf{Modelos basados en reglas lógicas}: La generación de reglas es compleja, solo se reconocen acciones atómicas, problemas con video secuencias largas.
+\end{itemize}
+
+Actualmente se han propuesto numerosas soluciones basadas en deep learning, debido a la excelente capacidad de generalización que poseen. Sin embargo, son modelos que pueden escalar fácilmente en complejidad y cantidad de parámetros, requiriendo un elevado poder de cómputo. Además pueden producir sobreajuste, y por ello es necesaria una gran cantidad de datos disponibles para el entrenamiento \citep{Beddiar2020}. También existe un compromiso entre la resolución espacial y la temporal, es decir, a mayor resolución espacial, menor es la cantidad de cuadros que podrá ser analizada para determinar la actividad \citep{Asadi-Aghbolaghi2017}. \\
+
+En este trabajo se analizará la combinación de técnicas clásicas de detección de contornos y posterior utilización de un modelo de deep learning, bajo la hipótesis de que el uso de las siluetas humanas como única entrada de datos podrá reducir significativamente la cantidad de parámetros necesarios para la representación espacial, permitiendo ampliar el horizonte temporal y disminuir los requerimientos para el entrenamiento. \\
+
+En las siguientes secciones se plantea el problema a resolver y las preguntas de investigación que conducen el proceso de revisión de la literatura; se especifican los objetivos; se presentan las técnicas clásicas y actuales utilizadas, limitaciones y desafíos; se plantea la hipótesis, se detalla la metodología adoptada, y finalmente se incluye un cronograma presentando las actividades a realizar y estimaciones de fechas para cada una. \\
+

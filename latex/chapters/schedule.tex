@@ -1,0 +1,77 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX root = ../thesis.tex
+
+\chapter{Cronograma} \label{Schedule}
+
+\begin{table}[ht]
+	\renewcommand{\arraystretch}{1.8}
+	\centering
+	\begin{tabular}{m{0.20\textwidth}m{0.35\textwidth}m{0.13\textwidth}m{0.10\textwidth}m{0.11\textwidth}}
+		% Header
+		\rowcolor{TableCyan}
+		\hline
+		\centering \textbf{Etapa} & \centering \textbf{Actividad} & \centering \textbf{Duración (semanas)} & \makecell[cc]{\textbf{Fecha} \\ \textbf{Inicio}} & {\centering \textbf{Fecha Fin}} \\ \hline
+		% Inicio del proyecto
+		\rowcolor{TableYellow}
+		& Definición del proceso de gestión del proyecto. & & & \\
+		\rowcolor{TableYellow}
+		& Selección de herramientas a utilizar para la gestión, instalación y puesta a punto. & & & \\
+		\rowcolor{TableYellow}
+		\multirow{-3}{0.20\textwidth}[2em]{\centering \textbf{Inicio del proyecto}} & Creación de una lista de tareas iniciales. & \multirow{-3}{0.13\textwidth}[2em]{\centering 2} & \multirow{-3}{0.10\textwidth}[2em]{\centering 13/11/23} & \multirow{-3}{0.10\textwidth}[2em]{\centering 27/11/23} \\ \hline	
+		% Investigación de las técnicas y modelos utilizados
+		\rowcolor{TableCyan2}
+		& Definición del proceso de revisión de la literatura y fuentes a investigar. & \centering 1 & \centering 27/11/23  & {\centering 04/12/23} \\
+		\rowcolor{TableCyan2}
+		& Armado de consultas en base a objetivos, y criterios de selección de artículos. & \centering 2 & \centering 04/12/23 & {\centering 18/12/23} \\
+		\rowcolor{TableCyan2}
+		& Ejecución de de cada consulta en cada fuente y selección preliminar de artículos (lectura diagonal) & \centering 3 & \centering 18/12/23 & {\centering 08/01/24} \\
+		\rowcolor{TableCyan2}
+		& Lectura en profundidad de los artículos y selección final & \centering 3 & \centering 08/01/24 & {\centering 29/01/24} \\
+		\rowcolor{TableCyan2}
+		\multirow{-5}{0.20\textwidth}[4em]{\centering \textbf{Investigación de las técnicas y modelos utilizados}} & Armado del registro con las características, métricas y bases de datos utilizados en cada artículo & \centering 2 & \centering 29/01/24 & {\centering 12/02/24} \\ \hline
+		% Obtención y armado de la base de datos
+		\rowcolor{TableMagenta}
+		& Identificación, clasificación, selección y obtención de bases de datos públicas. & \centering 1 & \centering 12/02/24  & {\centering 19/02/24} \\
+		\rowcolor{TableMagenta}
+		& Análisis preliminar y preselección de los segmentos de video según categorías, calidad, duración y formato. & \centering 2 & \centering 19/02/24 & {\centering 04/03/24} \\
+	\end{tabular}
+	\label{tab:Schedule1}
+\end{table}
+
+\begin{table}[ht]
+	\renewcommand{\arraystretch}{1.8}
+	\centering
+	\begin{tabular}{m{0.20\textwidth}m{0.35\textwidth}m{0.13\textwidth}m{0.10\textwidth}m{0.11\textwidth}}
+		% Obtención y armado de la base de datos
+		\rowcolor{TableMagenta}
+		& Análisis individual de cada archivo de video y selección final. & \centering 2 & \centering 04/03/24 & {\centering 18/03/24} \\
+		\rowcolor{TableMagenta}
+		& Definición del proceso y herramientas necesarias para adaptar y homogeneizar los distintos archivos. & \centering 1 & \centering 18/03/24 & {\centering 25/03/24} \\
+		\rowcolor{TableMagenta}
+		\multirow{-3}{0.20\textwidth}[2em]{\centering \textbf{Obtención y armado de la base de datos}} & Implementación y ejecución del proceso, obteniendo como resultado una única base de datos. & \centering 3 & \centering 25/03/24 & {\centering 15/04/24} \\ \hline
+		% Experimentación
+		\rowcolor{TableGreen}
+		& Selección e implementación del algoritmo de contornos activos. & \centering 4 & \centering 15/04/24  & {\centering 13/05/24} \\
+		\rowcolor{TableGreen}
+		& Diseño e implementación del modelo de reconocimiento de actividades humanas. & \centering 4 & \centering 13/05/24 & {\centering 10/06/24} \\
+		\rowcolor{TableGreen}
+		& Diseño de las métricas e implementación de la herramienta que las obtendrá. & \centering 2 & \centering 10/06/24 & {\centering 24/06/24} \\
+		\rowcolor{TableGreen}
+		& Entrenamiento y optimización del modelo. & \centering 2 & \centering 24/06/24 & {\centering 08/07/24} \\
+		\rowcolor{TableGreen}
+		& Revisión de diseño de características y el modelo, propuesta e implementación de mejoras. Obtención de nuevas métricas y elección del modelo ganador. & \centering 4 & \centering 08/07/24 & {\centering 05/08/24} \\
+		\rowcolor{TableGreen}
+		\multirow{-6}{0.20\textwidth}[7em]{\centering \textbf{Experimentación}} & Instalación y ejecución de modelos pre-entrenados existentes. Obtención de métricas. & \centering 3 & \centering 05/08/24 & {\centering 26/08/24} \\ \hline
+		% Resultados
+		\rowcolor{TablePurple}
+		& Análisis detallado de los resultados obtenidos y la comparación de modelos. & \centering 2 & \centering 26/08/24  & {\centering 09/09/24} \\
+		\rowcolor{TablePurple}
+		\multirow{-2}{0.20\textwidth}[1em]{\centering \textbf{Resultados}} & Elaboración de conclusiones y finalización de informe. & \centering 1 & \centering 09/09/24 & {\centering 16/09/24} \\ \hline
+		\rowcolor{TableDarkYellow}
+		\centering \textbf{Total} & & \centering \textbf{44} & \centering \textbf{13/11/23} & {\centering \textbf{16/09/24}} \\ \hline
+	\end{tabular}
+	\caption{Cronograma}
+	\label{tab:Schedule2}
+\end{table}
+
+\vfill

@@ -1,0 +1,110 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[11pt, a4paper, twoside, openany]{book}
+
+% Setup of packages used
+\usepackage[onehalfspacing]{setspace}		% One half spacing
+\newlength{\stockheight}					% To prevent hyperref warning
+\setlength{\stockheight}{\paperheight}		% define \stockheigh
+\usepackage{hyperref}					% Hyperlinks on pdf (Should be called before Geometry)
+\usepackage[a4paper, 					% Page Layout
+                     %showframe,				% This shows the frame
+                     twoside, %includehead,
+                     footskip=7mm, headsep=6mm, headheight=4.8mm,
+                     marginparsep=2mm, marginparwidth=22mm,
+                     top=25mm, bottom=25mm, inner=30mm, outer=25mm]{geometry}
+\usepackage{sansmathfonts}				% Sans Serif equations
+%\usepackage[T1]{fontenc}					% Output font encoding for international characters
+
+\usepackage[utf8]{inputenc}				% Encoding of files: utf8
+
+\usepackage{titlesec}						% Redefine chapter and chapter* titles
+\titleformat{\chapter}[display]{\huge \bfseries}{\vspace{-4cm}}{0pt}{\hfill}[{\titlerule[1.2pt]}]
+\titleformat{name=\chapter,numberless}[display]{\huge \bfseries}{\vspace{-4cm}}{0pt}{\hfill}[{\titlerule[1.2pt]}]
+
+\usepackage{fancyhdr}					% Package to redefine headers
+\fancyhf{}								% No header nor footer
+\fancyhead[LE,RO]{\thepage}				% Left even and right odd Page Number
+\fancyhead[RE]{\nouppercase{\leftmark}}		% Right even Section
+\fancyhead[LO]{\nouppercase{\rightmark}}		% Left odd Chapter
+\pagestyle{fancy}
+
+\fancypagestyle{plain}{					% To change the footer on chapter and chapter*
+	\fancyhf{}							% No header nor footer
+%	\fancyfoot[C]{\vspace{-11mm}\thepage}	% Footer with number displaced
+	\renewcommand{\headrulewidth}{0pt}	% No line on header
+	\renewcommand{\footrulewidth}{0pt}		% No line on footer
+}
+
+\RequirePackage{caption} 				% Caption customization
+\captionsetup{justification=centerlast,font=small,labelfont=sc,margin=1cm}
+
+% Setup the language and its properties (choose only one)
+\usepackage[spanish, es-tabla, es-nodecimaldot]{babel}
+\addto\captionsspanish{\renewcommand{\contentsname}{Contenido}}
+
+\usepackage{amssymb,amsmath}
+%\usepackage[square, numbers]{natbib}		% Bibliography
+\usepackage[round]{natbib}
+\usepackage{tikz}							% Required for title page
+\usetikzlibrary{babel}						% Required to make TikZ works with babel
+\usepackage[section]{placeins}				% To flush floats before new section
+\usepackage{longtable}					% Used by List of Symbols and friends
+\usepackage{array}						% Needed by longtable package
+\usepackage{graphicx}
+
+\usepackage{color, colortbl}
+\definecolor{TableShade}{gray}{0.9}
+\definecolor{TableCyan}{HTML}{D0E0E3}
+\definecolor{TableYellow}{HTML}{FFF2CC}
+\definecolor{TableCyan2}{HTML}{C9DAF8}
+\definecolor{TableMagenta}{HTML}{EAD1DC}
+\definecolor{TableGreen}{HTML}{D9EAD3}
+\definecolor{TablePurple}{HTML}{D9D2E9}
+\definecolor{TableDarkYellow}{HTML}{F1C232}
+
+\usepackage{makecell}
+\usepackage{enumitem}
+\usepackage{multirow}
+
+% Macros provided
+\def\fecha{\ifcase\month\or
+  Enero\or Febrero\or Marzo\or Abril\or Mayo\or Junio\or
+  Julio\or Agosto\or Septiembre\or Octubre\or Noviembre\or Diciembre\fi \space\number\year
+}
+
+\makeatletter
+\newcommand*{\degree}[1]{\gdef\@degree{#1}}
+\newcommand*{\subtitle}[1]{\gdef\@subtitle{#1}}
+\newcommand*{\director}[1]{\gdef\@director{#1}}
+\newcommand*{\codirector}[1]{\gdef\@codirector{#1}}
+\newcommand*{\firstEvaluator}[1]{\gdef\@firstEvaluator{#1}}
+\newcommand*{\secondEvaluator}[1]{\gdef\@secondEvaluator{#1}}
+\newcommand*{\thirdEvaluator}[1]{\gdef\@thirdEvaluator{#1}}
+\newcommand*{\copyrightYear}[1]{\gdef\@copyrightYear{#1}}
+\newcommand*{\titleEN}[1]{\gdef\@titleEN{#1}}
+\newcommand*{\subtitleEN}[1]{\gdef\@subtitleEN{#1}}
+\newcommand*{\dateEN}[1]{\gdef\@dateEN{#1}}
+\makeatother
+
+\input{preamble/user_packages.tex}		% User packages
+\input{preamble/title_data.tex}				% Title data
+
+\frontmatter
+\begin{document}
+
+\input{preamble/cover.tex}
+
+\input{preamble/keywords.tex}
+
+\tableofcontents
+
+\mainmatter
+\pagenumbering{arabic}
+
+\input{chapters/chapters_list.tex}
+
+\bibliographystyle{apalike} % for APA
+\bibliography{bibliography}
+\addcontentsline{toc}{chapter}{\bibname}    %To include the bibliography in the toc
+
+\end{document}  

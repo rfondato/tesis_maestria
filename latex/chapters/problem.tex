@@ -1,0 +1,53 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX root = ../thesis.tex
+\chapter{Planteamiento del Problema} \label{Problem}
+
+Las técnicas para la detección automática de acciones realizadas por personas en capturas de videos pueden dividirse, a grandes rasgos, en aquellas que utilizan herramientas de procesamiento de imágenes para obtener descriptores espacio-temporales y el posterior uso de modelos clásicos de machine learning para la clasificación, y en aquellas basadas en la explotación de grandes volúmenes de datos y la consecuente utilización de modelos de deep learning para etiquetar las acciones detectadas. \\
+
+Estos últimos modelos, más investigados en la actualidad, permiten obtener descriptores más robustos que los primeros, pero requieren una gran cantidad de recursos computacionales (poder de procesamiento y memoria), tiempo y disponibilidad de datos para su entrenamiento, debido al tamaño de los archivos de video en memoria y la cantidad de parámetros que deben ser optimizados. Existe además, un compromiso entre el horizonte temporal y la resolución espacial. Es decir, a mayor resolución de la imagen de entrada, menor cantidad de cuadros podrán ser analizados por el modelo para efectuar la clasificación, y viceversa. \\
+
+El problema que se intenta resolver es, para una determinada resolución de video de entrada, la expansión del horizonte temporal y la disminución de la cantidad de parámetros de un modelo basado en deep learning, con la consecuente reducción de la cantidad de datos y recursos computacionales necesarios para el entrenamiento, obteniendo a la vez las ventajas de robustez y rendimiento que otorgan este tipo de modelos, específicamente para el ámbito de reconocimiento de acciones humanas básicas.
+
+\section{Formulación del problema: Preguntas de Investigación}
+
+\begin{enumerate}
+	\item ¿ Qué bases de datos existen que contengan videos clasificados o no clasificados, muestren a una o más personas realizando distintas acciones y sean de acceso público?
+	\begin{enumerate}
+		\item ¿Qué formato y calidad presentan los videos? ¿Son todos los segmentos de la misma duración, tamaño, formato y calidad?
+		\item En caso de estar clasificados, ¿De qué manera están etiquetados?
+	\end{enumerate}
+	\item ¿Qué modelos, basados en visión por computadora, son utilizados actualmente para reconocer acciones humanas en capturas de video?
+	\begin{enumerate}
+		\item ¿Cuáles de ellos se basan en la utilización de machine y/o deep learning?
+	\end{enumerate}
+	\item ¿Qué técnicas clásicas de procesamiento de imágenes se utilizan para construir descriptores útiles para la detección de actividades humanas y cuáles son las ventajas y limitaciones de cada uno? 
+	\begin{enumerate}
+		\item ¿Qué modelos existen que combinen éstas técnicas con el uso de deep learning?
+	\end{enumerate}
+	\item ¿Qué modelos se utilizan actualmente para detectar contornos o siluetas, y que ventajas y limitaciones poseen?
+	\begin{enumerate}
+		\item ¿Cuáles de éstos métodos se usan para el reconocimiento de actividades humanas?
+	\end{enumerate}
+	\item ¿Qué técnicas combinan la detección de siluetas o contornos humanos y posterior uso de modelos de deep learning para clasificar actividades humanas en video?
+\end{enumerate}
+
+\section{Objetivo de la investigación}
+
+Combinar técnicas de detección de contornos y modelos basados en machine o deep learning para, a partir de capturas de video y en forma automática, clasificar acciones realizadas por personas, etiquetando cada cuadro con la actividad detectada, evaluando el rendimiento, consumo de recursos y tiempos de inferencia, y compararlos con modelos de deep learning que sean utilizados actualmente para este fin.
+
+\subsection{Objetivos Específicos}
+
+\begin{itemize}
+	\item Identificar, clasificar, adaptar y unificar bases de datos de acceso público que contengan registros de video donde se observen diferentes actividades realizadas por personas.
+	\item Implementar un algoritmo de preprocesamiento que, dadas las capturas de video, permita construir características derivadas de la aplicación de técnicas de detección de contornos y/o segmentación de personas.
+	\item Adaptar o combinar modelos que, dadas las características construidas como resultados del objetivo anterior, permitan clasificar las actividades realizadas por personas, en un segmento de video.
+	\item Evaluar el desempeño de la herramienta desarrollada o adaptada sobre uno o más sets de datos de testeo, mediante la utilización de métricas para modelos de clasificación, y compararla con el rendimiento de técnicas existentes de deep learning que utilicen directamente las capturas de video como entrada de datos.
+\end{itemize}
+
+\subsection{Justificación del estudio}
+
+Las técnicas de detección de acciones humanas en capturas de video que utilizan modelos de deep learning entrenados y aplicados cuadro por cuadro requieren el ajuste de una gran cantidad de parámetros para obtener un rendimiento útil, y por consiguiente necesitan un gran poder de cómputo y una elevada cantidad de datos de entrenamiento para reducir el sobreajuste. La utilización de métodos de detección de contornos y/o segmentación de personas para la construcción de características que puedan ser utilizadas como entrada a un modelo de machine o deep learning, podría reducir este costo. \\
+
+El presente trabajo pretende estudiar el desempeño, uso de recursos y tiempos de inferencia de la técnica propuesta y evaluar ventajas y desventajas al compararlo con la utilización de modelos basados en deep learning empleados actualmente para el mismo fin, otorgando como resultado, métricas concretas que permitan comparar objetivamente ambos enfoques. \\
+
+El modelo resultante permitirá reconocer acciones humanas básicas en video y clasificarlas, en forma automática, utilizando únicamente videos RGB como entrada de datos, lo cual lo hace apto para aplicaciones de video vigilancia, médicas, entre otras.

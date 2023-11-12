@@ -1,0 +1,39 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX root = ../thesis.tex
+
+\chapter{Hipótesis} \label{Hyphotesis}
+
+La construcción de descriptores resultantes de la aplicación de técnicas de detección de contornos y/o segmentación de personas sobre cada cuadro de video y posterior uso de modelos de machine o deep learning, permite reconocer y clasificar actividades básicas realizadas por personas en video con un rendimiento similar al obtenido mediante el uso de modelos de deep learning que son entrenados utilizando directamente los cuadros de video como entrada de datos, pero requiriendo menor tiempo, recursos de cómputo y datos para el entrenamiento.
+
+\section{Variables independientes}
+
+\begin{table}[ht]
+	\renewcommand{\arraystretch}{1.3}
+	\centering
+	\begin{tabular}{>{\centering}m{0.13\textwidth}>{\raggedright}m{0.25\textwidth}m{0.25\textwidth}m{0.25\textwidth}} \hline
+		\rowcolor{TableShade}
+		\hline
+		\textbf{Variable}  & \textbf{Descripción} & \textbf{Indicadores} & \textbf{Métricas} \\ \hline 
+		Cuadros de video & Cada imagen estática RGB presente en un segmento de video & Intensidad de gris por canal, por píxel en cada cuadro de video & Valores enteros entre 0 y 255. \\ \hline
+	\end{tabular}
+	\caption{Variables Independientes}
+	\label{tab:VarIndep}
+\end{table}
+
+\section{Variables dependientes}
+
+\begin{table}[ht]
+	\renewcommand{\arraystretch}{1.3}
+	\centering
+	\begin{tabular}{>{\centering}m{0.13\textwidth}>{\raggedright}m{0.25\textwidth}m{0.25\textwidth}m{0.25\textwidth}} \hline
+		\rowcolor{TableShade}
+		\hline
+		\textbf{Variable}  & \textbf{Descripción} & \textbf{Indicadores} & \textbf{Métricas} \\ \hline 
+		Rendimiento del modelo & Métricas de rendimiento para modelos de clasificación & \makecell[bl]{Precisión \\ Especificidad \\ Sensibilidad \\ F1-Score} & Valores reales entre 0 y 1 \\ \hline
+		Tiempo de cómputo & Tiempo necesario para entrenar el modelo & Cantidad de minutos cuantificados desde el inicio hasta la convergencia del entrenamiento del modelo & Valor real positivo \\ \hline
+		Tiempo de inferencia &Tiempo necesario para inferir un resultado a partir de un dato de entrada & Cantidad de segundos por cuadro de video a inferir & Valor real positivo \\ \hline
+		Recursos de cómputo & Cantidad de espacio en memoria necesario para entrenar el modelo y para la inferencia & Espacio en disco y en memoria RAM utilizados medidos en megabytes (MB) & Valores reales positivos \\ \hline
+	\end{tabular}
+	\label{tab:VarDep}
+	\caption{Variables Dependientes}
+\end{table}

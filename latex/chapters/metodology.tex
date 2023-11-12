@@ -1,0 +1,93 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX root = ../thesis.tex
+
+\chapter{Metodología} \label{Metodology}
+
+\section{Tipo de Investigación}
+
+Se realizará una investigación aplicada, adaptando e integrando modelos y herramientas existentes para estudiar concretamente la detección automática de acciones humanas básicas en segmentos de video en tiempo real, rendimiento y uso de recursos computacionales de cada técnica.
+
+Se experimentará en un entorno controlado mediante una preselección, adaptación e integración de bases de datos, y se utilizarán métricas concretas para medir los aspectos mencionados, por lo cual será una investigación experimental y cuantitativa, obteniendo como resultado una descripción de las consecuencias observadas en base a los modelos utilizados.
+
+\section{Diseño de la investigación}
+
+A continuación se describe la organización de tareas, disponibilidad de datos y recursos, y técnicas y herramientas a utilizar para llevar a cabo la investigación propuesta.
+
+\subsection{Planificación de actividades}
+
+\begin{enumerate}
+	\item Como primer paso se realizará una revisión de la literatura, principalmente de artículos publicados en revistas científicas y conferencias. El objetivo es identificar las diferentes técnicas, modelos y herramientas utilizados actualmente para el reconocimiento de actividades humanas, y realizar un análisis del uso y rendimiento de técnicas de detección de contornos, en segmentos de video.
+	\item Se perfilarán las técnicas y modelos encontrados:
+	\begin{enumerate}[label=\alph*]
+		\item {\bf Según el enfoque:} Uso o no de técnicas de deep learning, métodos clásicos, entrenamiento supervisado o no supervisado.
+		\item {\bf Según el tratamiento de los datos de entrada:} La realización o no de un preprocesamiento para la obtención de características previo al entrenamiento del modelo y el tipo de características extraídas.
+		\item {\bf Según los set de datos usados para la experimentación:} Datos etiquetados o no, generados artificialmente o no, tipos de actividades humanas estudiadas en cada base de datos, etc.
+		\item {\bf Según las métricas obtenidas:} Cuáles se utilizaron, como fueron medidas.
+	\end{enumerate}
+	\item Se explorarán y analizarán bases de datos de acceso público que contengan segmentos de videos que muestren personas realizando diversas actividades y hayan sido mencionadas y empleadas en publicaciones de calidad para la medición del rendimiento de modelos de detección.
+	\item Se construirá un único set de datos, que se utilizará para la experimentación. Este set de datos deberá ser lo más heterogéneo posible respecto al contenido (distintas áreas geográficas, distintos ángulos de visión, distinta iluminación, distinta composición de personas y objetos, etc.) y lo más homogéneo posible respecto a formato, calidad y duración de los segmentos de video.
+	\item Se seleccionará el modelo de detección de contornos y/o segmentación de personas a utilizar y se implementará el algoritmo que permitirá preprocesar las imágenes aplicando esta técnica sobre cada cuadro de cada video.
+	\item Se diseñará y entrenará el modelo que tomará como entrada los contornos mencionados en el punto anterior y clasificará los segmentos de video con la actividad detectada.
+	\item Se probará el modelo con un subconjunto de datos de testeo.
+	\item Se obtendrán métricas de rendimiento y uso de recursos respecto al entrenamiento y la inferencia.
+	\item Se seleccionarán y analizarán los modelos existentes que serán comparados con el modelo propuesto, y se obtendrán e instalarán las implementaciones.
+	\item Se ejecutarán los modelos del punto anterior y se compararán métricas con las obtenidas por el modelo en el paso 8.
+	\item Se propondrán cambios en el diseño de las características y del modelo y repetirán los pasos 5 a 9, para intentar conseguir mejores resultados.
+\end{enumerate}
+
+\subsection{Disponibilidad de los datos}
+
+Existen numerosas bases de datos de acceso público que poseen segmentos de video, mostrando diferentes actividades realizadas por personas. \\
+
+A grandes rasgos pueden ser segmentadas en:
+\begin{itemize}
+	\item {\bf No clasificadas:} Archivos de video que contienen diferentes actividades humanas no etiquetadas.
+	\item {\bf Clasificadas a nivel de segmento de video:} Cada archivo de video está etiquetado.
+	\item {\bf Clasificadas a nivel cuadro:} Cada cuadro indica la actividad presente.
+	\item {\bf Clasificadas a nivel píxel:} Existe una etiqueta en cada píxel de cada cuadro, lo que permite ubicar la posición de las personas en la imagen.
+\end{itemize}
+
+\subsection{Disponibilidad recursos tecnológicos}
+
+Los experimentos serán conducidos en un entorno cloud, con disponibilidad de uso de GPUs.
+
+\subsection{Personas involucradas}
+
+No es necesaria la presencia de un experto. La investigación será realizada únicamente por el autor.
+
+\subsection{Procesos de gestión de proyecto y datos}
+
+Para la gestión de los datos se utilizará la metodología CRISP-DM, siguiendo un enfoque iterativo de entendimiento del negocio y los datos, modelado y evaluación. De ésta manera se obtendrán periódicamente medidas de desempeño que guiarán correcciones en la toma de decisiones para la elección de las características a utilizar y modelado, con el propósito de incrementar la precisión de clasificación en cada iteración. \\
+
+Para la gestión de las tareas se adoptarán algunos aspectos de la metodología SCRUM, aplicadas a un solo individuo: Dividir el proyecto en iteraciones, construir una lista de tareas y escoger aquellas más prioritarias en cada iteración, obteniendo un entregable al finalizar cada ciclo.
+
+\subsection{Población y Muestra}
+
+Se usarán segmentos de video que muestran actividades básicas realizadas por humanos. No se pretende limitar la ubicación geográfica ni temporal. Los segmentos serán clasificados en múltiples categorías, según las actividades a reconocer.
+
+\subsection{Técnicas y herramientas}
+
+Para la construcción de características:
+\begin{itemize}
+	\item Detección de contornos, segmentación de imágenes.
+\end{itemize}
+
+Para la construcción del modelo:
+\begin{itemize}
+	\item Modelos basados en el uso de machine o deep learning.
+\end{itemize}
+
+Para la gestión de datos no estructurados:
+\begin{itemize}
+	\item Data Lake.
+\end{itemize}
+
+El lenguaje Python será la base para el desarrollo del modelo y evaluación de su desempeño. Se utilizará un data lake para almacenar y procesar los archivos de entrada (videos etiquetados), dado que son datos no estructurados de gran tamaño.
+\begin{itemize}
+	\item {\bf Gestión del data lake:} Herramientas similares a PySpark.
+	\item {\bf Procesamiento de datos:} Librerías de python de acceso público y uso frecuente para el procesamiento de datos tales como PySpark, Pandas, Numpy.
+	\item {\bf Preprocesamiento de imágenes:} Librerías de python y C++ de acceso público y uso frecuente para el procesamiento de imágenes tales como OpenCV.
+	\item {\bf Construcción de modelos de machine y deep learning:} Librerías de python para el modelado, entrenamiento y ejecución de herramientas basadas en machine o deep learning tales como Tensorflow, PyTorch, Keras, Scikit-Learn.
+\end{itemize}
+
+Se usará un software de código abierto y acceso público para el registro y administración de las tareas del proyecto, como por ejemplo, OpenProject.
