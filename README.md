@@ -1,3 +1,5 @@
-# Tesis de Maestría:
+# Tesis de Maestría: 
 
-Tesis de Maestria en Ciencia de Datos
+## Reconocimiento de Acciones Humanas en Video, utilizando Detección de Contornos y Deep Learning
+
+### Autor: Rodrigo Fondato
